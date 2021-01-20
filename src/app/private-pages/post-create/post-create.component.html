@@ -1,0 +1,29 @@
+<mat-card class="mat-elevation-z6">
+  <form  #postsForm="ngForm">
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        type="text"
+        name="title"
+        required
+        ngModel
+        autocomplete="off"
+      />
+      <mat-label>A Tittle</mat-label>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <textarea matInput rows="4" name="content" required ngModel></textarea>
+      <mat-label>Some Content</mat-label>
+    </mat-form-field>
+    <br />
+    <button
+      mat-flat-button
+      color="accent"
+      type="submit"
+      [disabled]="postsForm.invalid"
+      (click)="onAddPost(postsForm)"
+    >
+      {{createPostText}}
+    </button>
+  </form>
+</mat-card>

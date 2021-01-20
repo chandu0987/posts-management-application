@@ -1,0 +1,50 @@
+<mat-card class="info-signup-text">
+  <form #signUpForm="ngForm">
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        type="email"
+        name="email"
+        email="true"
+        required
+        ngModel
+        autocomplete="off"
+      />
+      <mat-label>Email</mat-label>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        type="text"
+        name="name"
+        required
+        ngModel
+        autocomplete="off"
+      />
+      <mat-label>Name</mat-label>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        type="password"
+        name="password"
+        required
+        ngModel
+        autocomplete="off"
+      />
+      <mat-label>Password</mat-label>
+    </mat-form-field>
+    <br />
+    <button
+      mat-flat-button
+      color="accent"
+      type="submit"
+      [disabled]="signUpForm.invalid"
+      (click) = onSignUp()
+    >
+      {{ signUpButtonText }}
+    </button>
+  </form>
+</mat-card>

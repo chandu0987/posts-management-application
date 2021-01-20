@@ -1,0 +1,5 @@
+<mat-toolbar color="primary">
+  <span>My App</span>
+  <span class="example-spacer"></span>
+  <button *ngFor= 'let button of buttons' mat-button color="accent" routerLinkActive="test" (click)="navigate(button)">{{ button }}</button>
+</mat-toolbar>

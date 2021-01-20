@@ -1,0 +1,37 @@
+<mat-card class="info-signin-text">
+  <form #signInForm="ngForm">
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        type="email"
+        name="email"
+        required
+        ngModel
+        autocomplete="off"
+        email="true"
+      />
+      <mat-label>Email</mat-label>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        type="password"
+        name="password"
+        required
+        ngModel
+        autocomplete="off"
+      />
+      <mat-label>password</mat-label>
+    </mat-form-field>
+    <br />
+    <button
+      (click)="navigateToCreatePost()"
+      [disabled]="signInForm.invalid"
+      mat-flat-button
+      color="accent"
+    >
+      {{ signInButtonText }}
+    </button>
+  </form>
+</mat-card>
