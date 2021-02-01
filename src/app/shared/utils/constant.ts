@@ -18,3 +18,7 @@ export enum BUTTON_TEXTS {
   POST_CREATE = 'CREATE POST',
   LOG_OUT = 'LOG OUT',
 }
+
+export enum SNACKBAR_MESSAGES{
+  POST_CREATE_SUCCESS = 'Post created successfully :)'
+}

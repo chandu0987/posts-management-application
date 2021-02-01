@@ -10,6 +10,7 @@ import { HomeComponent } from './public-pages/home.component';
 import { PrivateHomeComponent } from './private-pages/home.component';
 import { PublicPostListComponent } from './public-pages/post-list/post-list.component';
 import { CommonModule } from '@angular/common';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CommonModule } from '@angular/common';
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,8 +8,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { HeaderComponent } from './components/header/header.component';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,8 @@ import { CommonModule } from '@angular/common';
     MatCardModule,
     MatExpansionModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    MatSnackBarModule
 
   ],
   exports:[
@@ -35,7 +36,8 @@ import { CommonModule } from '@angular/common';
     MatExpansionModule,
     HeaderComponent,
     FormsModule,
-    CommonModule
+    CommonModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: []

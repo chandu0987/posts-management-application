@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PostsService } from '../../posts.service';
+import { PostsService } from '../../shared/services/posts.service';
 import{ Post} from '../../shared/models/post.model';
 @Component({
   selector: 'app-post-list',
@@ -10,6 +10,6 @@ export class PrivatePostListComponent {
  posts: Post[]=[];
 
  constructor(private postsService: PostsService){
-   this.posts= this.postsService.getPosts();
+  // this.posts= this.postsService.getPosts();
  }
 }
