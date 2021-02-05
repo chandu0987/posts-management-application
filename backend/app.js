@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const Post = require("./models/post");
 const mongoose = require("mongoose");
-const { title } = require("process");
 const app = express();
 
 mongoose
@@ -28,7 +27,7 @@ app.use((req, res, next) => {
 
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS"
+    "GET, POST, PATCH, DELETE, OPTIONS, PUT"
   );
   next();
 });
@@ -51,23 +50,52 @@ app.post("/api/posts", (req, res, next) => {
       });
     });
 });
+
+app.put("/api/post", (req, res, next) => {
+  const {body:{title, content, _id }} = req;
+  const post = new Post({
+    title, content,_id
+  });
+  Post.updateOne({ _id }, post)
+    .then((updatedData) => { 
+      res.status(201).json({
+        message: "Post updated successfully",
+      });
+    })
+    .catch((message) => {
+      res.status(500).json({
+        message,
+      });
+    });
+});
+
 app.get("/api/posts", (req, res, next) => {
   Post.find()
     .then((documents) => {
-      const posts = [];
-      if (documents.length > 0) {
-        documents.forEach((element) => {
-          posts.push({
-            title: element.title,
-            content: element.content,
-            id: element._id,
-          });
-        });
-      }
       res.status(200).json({
         message: "Posts fetched successfully",
-        posts,
+        posts: documents,
       });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: error,
+      });
+    });
+});
+
+app.get("/api/post/:id", (req, res, next) => {
+  const postId = req.params.id;
+  Post.findById(postId)
+    .then((document) => {
+      document
+        ? res.status(200).json({
+            message: "Post fetched successfully",
+            post: document,
+          })
+        : res.status(500).json({
+            message: "Post not found!",
+          });
     })
     .catch((error) => {
       res.status(500).json({

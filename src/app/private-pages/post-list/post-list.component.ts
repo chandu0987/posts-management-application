@@ -1,16 +1,52 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { PostsService } from '../../shared/services/posts.service';
-import{ Post} from '../../shared/models/post.model';
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { PostsService } from 'src/app/shared/services/posts.service';
+import { Post } from 'src/app/shared/models/post.model';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { Router } from '@angular/router';
+import { PRIVATE_ROUTE_PATHS, PUBLIC_ROUTE_PATHS } from 'src/app/shared/utils/constant';
+
 @Component({
-  selector: 'app-post-list',
+  selector: 'app-public-post-list',
   templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.scss']
+  styleUrls: ['./post-list.component.scss'],
 })
-export class PrivatePostListComponent {
- posts: Post[]=[];
+export class PrivatePostListComponent implements OnInit {
+  posts: Post[] = [];
+  constructor(
+    private postsService: PostsService,
+    private snackbar: SnackbarService,
+    private router : Router,
+  ) {}
 
- constructor(private postsService: PostsService){
-  // this.posts= this.postsService.getPosts();
- }
+  ngOnInit(): void {
+    this.fetchPosts();
+  }
 
+  fetchPosts(): void {
+    this.postsService.getPosts().subscribe(
+      (data) => {
+        this.posts = data.posts;
+      },
+      (error) => {
+        this.snackbar.showSuccess(error.message);
+      }
+    );
+  }
+
+  onDeletePost(postId: string) {
+    this.postsService.deletePost(postId).subscribe(
+      (data) => {
+        this.fetchPosts();
+        this.snackbar.showSuccess(data.message);
+      },
+      (error) => {
+        this.snackbar.showSuccess(error.message);
+      }
+    );
+  }
+  
+  onEditPost(id: string) {
+    this.router.navigate([`${PRIVATE_ROUTE_PATHS.POST_EDIT}/${id}`])
+  }
 }

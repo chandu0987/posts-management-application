@@ -2,14 +2,14 @@ export enum PUBLIC_ROUTE_PATHS {
   SIGN_IN = '/public/sign-in',
   SIGN_UP = '/public/sign-up',
   PUBLIC_POST_LIST = '/public/post-list',
-  PUBLIC = '/public',
-  EDIT = '/post-edit/:postId'
+  PUBLIC = '/public'
 }
 
 export enum PRIVATE_ROUTE_PATHS {
-  POST_CREATE = '/post-create',
+  POST_CREATE = '/post/create',
   LOGOUT = '/public/sign-in',
   PRIVATE_POST_LIST = '/post-list',
+  POST_EDIT = '/post/edit'
 }
 
 export enum BUTTON_TEXTS {
@@ -18,6 +18,7 @@ export enum BUTTON_TEXTS {
   POST_LIST = 'POST LIST',
   POST_CREATE = 'CREATE POST',
   LOG_OUT = 'LOG OUT',
+  UPDATE_POST = 'UPDATE POST'
 }
 
 export enum SNACKBAR_MESSAGES{

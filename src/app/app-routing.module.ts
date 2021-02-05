@@ -6,6 +6,7 @@ import { SignInComponent } from './public-pages/sign-in/sign-in.component';
 import { SignUpComponent } from './public-pages/sign-up/sign-up.component';
 import { AuthenticationGuard } from './shared/guards/authentication.guard';
 import { PublicPostListComponent } from './public-pages/post-list/post-list.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,7 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard],
     children: [
       {
-        path: 'post-create',
+        path: 'post',
         loadChildren: () =>
           import('./private-pages/post-create/post-create.module').then(
             (m) => m.PostCreateModule
@@ -38,8 +39,10 @@ const routes: Routes = [
       { path: 'sign-in', component: SignInComponent },
       { path: 'sign-up', component: SignUpComponent },
       { path: 'post-list', component: PublicPostListComponent },
+
     ],
   },
+  {  path: "**", component: PageNotFoundComponent}
 ];
 
 @NgModule({

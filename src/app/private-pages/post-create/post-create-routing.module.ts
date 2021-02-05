@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PostEditComponent } from '../post-edit/post-edit.component';
 import { PostCreateComponent } from './post-create.component';
 
 const routes: Routes = [
-  {path: '', component: PostCreateComponent}
+  {path: '', redirectTo:'create', pathMatch: 'full'},
+  {path: 'create', component: PostCreateComponent},
+  {path: 'edit/:postId', component:PostEditComponent }
 ];
 
 @NgModule({

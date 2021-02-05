@@ -3,12 +3,13 @@ import { Post } from '../models/post.model';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { stringify } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostsService {
-  posts: Post[] = [];
+
 
   constructor(private http: HttpClient) {}
 
@@ -31,8 +32,15 @@ export class PostsService {
     );
   }
 
-  getPost(id : string){
-    return{...this.posts.find(p => p.id == id)};
+  getPost(postId : string ){
+    return this.http.get<{message: string, post ?: Post }>(
+      `${environment.host}/post/${postId}`
+    );
+  }
+
+  updatePost(post: Post){
+     return this.http.put<{message: string}>(
+        `${environment.host}/post`, post)
   }
 }
 

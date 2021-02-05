@@ -33,19 +33,4 @@ export class PublicPostListComponent implements OnInit {
       }
     );
   }
-
-  onDeletePost(postId: string) {
-    this.postsService.deletePost(postId).subscribe(
-      (data) => {
-        this.fetchPosts();
-        this.snackbar.showSuccess(data.message);
-      },
-      (error) => {
-        this.snackbar.showSuccess(error.message);
-      }
-    );
-  }
-  onEditPost() {
-    this.router.navigate([PUBLIC_ROUTE_PATHS.EDIT])
-  }
 }
