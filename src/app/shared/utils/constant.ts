@@ -2,7 +2,8 @@ export enum PUBLIC_ROUTE_PATHS {
   SIGN_IN = '/public/sign-in',
   SIGN_UP = '/public/sign-up',
   PUBLIC_POST_LIST = '/public/post-list',
-  PUBLIC = '/public'
+  PUBLIC = '/public',
+  EDIT = '/post-edit/:postId'
 }
 
 export enum PRIVATE_ROUTE_PATHS {

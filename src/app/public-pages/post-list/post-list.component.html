@@ -4,6 +4,20 @@
       <mat-panel-title> {{post.title}} </mat-panel-title>
     </mat-expansion-panel-header>
     <p>{{post.content}}</p>
+    <button
+    mat-stroked-button
+      color="accent"
+      type="submit"
+      (click)="onDeletePost(post.id)"
+    >Delete
+    </button>
+    <button
+    mat-stroked-button
+      color="accent"
+      type="submit"
+      (click)="onEditPost()"
+    >Edit
+    </button>
   </mat-expansion-panel>
 </mat-accordion>
 <p class="info-text mat-body-1" *ngIf="posts.length === 0">No posts yet!!</p>

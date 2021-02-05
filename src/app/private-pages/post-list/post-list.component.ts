@@ -12,4 +12,5 @@ export class PrivatePostListComponent {
  constructor(private postsService: PostsService){
   // this.posts= this.postsService.getPosts();
  }
+
 }

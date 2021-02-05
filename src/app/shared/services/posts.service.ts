@@ -24,4 +24,16 @@ export class PostsService {
       `${environment.host}/posts`
     );
   }
+
+  deletePost(postId : string){
+    return this.http.delete<{ message:string }>(
+     `${environment.host}/posts/${postId}`
+    );
+  }
+
+  getPost(id : string){
+    return{...this.posts.find(p => p.id == id)};
+  }
 }
+
+

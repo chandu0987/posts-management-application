@@ -19,7 +19,7 @@ import {HttpClientModule} from "@angular/common/http";
     SignUpComponent,
     HomeComponent,
     PrivateHomeComponent,
-    PublicPostListComponent
+    PublicPostListComponent,
   ],
   imports: [
     BrowserModule,

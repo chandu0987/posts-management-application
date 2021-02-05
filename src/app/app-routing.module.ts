@@ -20,6 +20,7 @@ const routes: Routes = [
             (m) => m.PostCreateModule
           ),
       },
+
       {
         path: 'post-list',
         loadChildren: () =>
