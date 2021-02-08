@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     MatExpansionModule,
     FormsModule,
     CommonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule
 
   ],
   exports:[
@@ -39,7 +42,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     HeaderComponent,
     FormsModule,
     CommonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: []

@@ -5,6 +5,7 @@ import { Post } from 'src/app/shared/models/post.model';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { Router } from '@angular/router';
 import { PRIVATE_ROUTE_PATHS, PUBLIC_ROUTE_PATHS } from 'src/app/shared/utils/constant';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-public-post-list',
@@ -13,6 +14,10 @@ import { PRIVATE_ROUTE_PATHS, PUBLIC_ROUTE_PATHS } from 'src/app/shared/utils/co
 })
 export class PrivatePostListComponent implements OnInit {
   posts: Post[] = [];
+  totalPosts = 10;
+  postsPerPage = 2;
+  pageSizeOptions = [1, 2, 5, 10];
+
   constructor(
     private postsService: PostsService,
     private snackbar: SnackbarService,
@@ -20,24 +25,24 @@ export class PrivatePostListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchPosts();
+    // this.fetchPosts();
   }
 
-  fetchPosts(): void {
-    this.postsService.getPosts().subscribe(
-      (data) => {
-        this.posts = data.posts;
-      },
-      (error) => {
-        this.snackbar.showSuccess(error.message);
-      }
-    );
-  }
+  // fetchPosts(): void {
+  //   this.postsService.getPosts().subscribe(
+  //     (data) => {
+  //       this.posts = data.posts;
+  //     },
+  //     (error) => {
+  //       this.snackbar.showSuccess(error.message);
+  //     }
+  //   );
+  // }
 
   onDeletePost(postId: string) {
     this.postsService.deletePost(postId).subscribe(
       (data) => {
-        this.fetchPosts();
+        // this.fetchPosts();
         this.snackbar.showSuccess(data.message);
       },
       (error) => {
@@ -45,8 +50,12 @@ export class PrivatePostListComponent implements OnInit {
       }
     );
   }
-  
+
   onEditPost(id: string) {
     this.router.navigate([`${PRIVATE_ROUTE_PATHS.POST_EDIT}/${id}`])
+  }
+
+  onPageChange(PrivatePostpageData: PageEvent){
+    console.log(PrivatePostpageData);
   }
 }

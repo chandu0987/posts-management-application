@@ -52,12 +52,16 @@ app.post("/api/posts", (req, res, next) => {
 });
 
 app.put("/api/post", (req, res, next) => {
-  const {body:{title, content, _id }} = req;
+  const {
+    body: { title, content, _id },
+  } = req;
   const post = new Post({
-    title, content,_id
+    title,
+    content,
+    _id,
   });
   Post.updateOne({ _id }, post)
-    .then((updatedData) => { 
+    .then((updatedData) => {
       res.status(201).json({
         message: "Post updated successfully",
       });
@@ -70,11 +74,23 @@ app.put("/api/post", (req, res, next) => {
 });
 
 app.get("/api/posts", (req, res, next) => {
-  Post.find()
-    .then((documents) => {
+  const pageSize = +req.query.pageSize;
+  const currentPage = +req.query.currentPage;
+  const postQuery = Post.find();
+  let fetchedPosts ;
+  if (pageSize && currentPage) {
+    postQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
+  }
+  postQuery
+  .then((documents) => {
+    fetchedPosts = documents;
+    return Post.countDocuments();
+  })
+    .then((totalPostsCount) => {
       res.status(200).json({
         message: "Posts fetched successfully",
-        posts: documents,
+        totalPostsCount,
+        posts: fetchedPosts,
       });
     })
     .catch((error) => {
