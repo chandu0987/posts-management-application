@@ -1,8 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const Post = require("./models/post");
 const mongoose = require("mongoose");
 const app = express();
+const postsRoute = require('./routes/post');
+const usersRoute = require('./routes/user');
+const Post = require('./models/post')
 
 mongoose
   .connect(
@@ -32,105 +34,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("/api/posts", (req, res, next) => {
-  const post = new Post({
-    title: req.body.title,
-    content: req.body.content,
-  });
-  post
-    .save()
-    .then(() => {
-      res.status(201).json({
-        message: "Post added successfully",
-      });
-    })
-    .catch((message) => {
-      res.status(500).json({
-        message,
-      });
-    });
-});
+app.use('/api/posts', postsRoute);
+app.use('/api/users', usersRoute);
 
-app.put("/api/post", (req, res, next) => {
-  const {
-    body: { title, content, _id },
-  } = req;
-  const post = new Post({
-    title,
-    content,
-    _id,
-  });
-  Post.updateOne({ _id }, post)
-    .then((updatedData) => {
-      res.status(201).json({
-        message: "Post updated successfully",
-      });
-    })
-    .catch((message) => {
-      res.status(500).json({
-        message,
-      });
-    });
-});
-
-app.get("/api/posts", (req, res, next) => {
-  const pageSize = +req.query.pageSize;
-  const currentPage = +req.query.currentPage;
-  const postQuery = Post.find();
-  let fetchedPosts ;
-  if (pageSize && currentPage) {
-    postQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
-  }
-  postQuery
-  .then((documents) => {
-    fetchedPosts = documents;
-    return Post.countDocuments();
-  })
-    .then((totalPostsCount) => {
-      res.status(200).json({
-        message: "Posts fetched successfully",
-        totalPostsCount,
-        posts: fetchedPosts,
-      });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: error,
-      });
-    });
-});
-
-app.get("/api/post/:id", (req, res, next) => {
-  const postId = req.params.id;
-  Post.findById(postId)
-    .then((document) => {
-      document
-        ? res.status(200).json({
-            message: "Post fetched successfully",
-            post: document,
-          })
-        : res.status(500).json({
-            message: "Post not found!",
-          });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: error,
-      });
-    });
-});
-
-app.delete("/api/posts/:id", (req, res, next) => {
-  Post.deleteOne({ _id: req.params.id })
-    .then(() => {
-      res.status(201).json({
-        message: "Post deleted successfully",
-      });
-    })
-    .catch((deleteMessage) => {
-      res.status(500).json({
-        message: deleteMessage,
-      });
-    });
-});
 module.exports = app;

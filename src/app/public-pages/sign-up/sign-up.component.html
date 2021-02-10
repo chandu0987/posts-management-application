@@ -42,7 +42,7 @@
       color="accent"
       type="submit"
       [disabled]="signUpForm.invalid"
-      (click) = onSignUp()
+      (click) = "onSignUp(signUpForm)"
     >
       {{ signUpButtonText }}
     </button>

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Post } from '../models/post.model';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { stringify } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +11,7 @@ export class PostsService {
 
   savePost(post: Post) {
     return this.http.post<{ message: string }>(
-      `${environment.host}/posts`,
+      `${environment.host}/posts/create-post`,
       post
     );
   }
@@ -38,6 +36,6 @@ export class PostsService {
   }
 
   updatePost(post: Post) {
-    return this.http.put<{ message: string }>(`${environment.host}/post`, post);
+    return this.http.put<{ message: string }>(`${environment.host}/post/update-post`, post);
   }
 }
